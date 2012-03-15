@@ -5,10 +5,6 @@
 Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
     Movie.create(movie)
-    #m.title = movie['title']
-    #m.rating = movie['rating']
-    #m.release_date = movie['release_date']
-    #m.save()
     # each returned element will be a hash whose key is the table header.
     # you should arrange to add that movie to the database here.
   end
@@ -20,7 +16,9 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
-  assert false, "Unimplmemented"
+  index1 = page.html.index(e1)
+  index2 = page.html.index(e2)
+  assert index1 != nil && index2 != nil && index1 < index2, "failed"
 end
 
 Then /I should not see any movies/ do 
