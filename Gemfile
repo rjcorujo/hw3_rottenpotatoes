@@ -14,6 +14,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
+  gem 'rspec-rails'
+  gem 'simplecov', :require => false
 end
 group :production do
 #  gem 'pg'
@@ -27,6 +29,8 @@ group :assets do
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
 end
+
+
 
 gem 'jquery-rails'
 

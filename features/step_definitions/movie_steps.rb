@@ -10,6 +10,12 @@ Given /the following movies exist/ do |movies_table|
   end
 end
 
+
+Then /the director of "(.*)" should be "(.*)"/ do |title, director|
+  m = Movie.find_by_title(title)
+  assert m.director == director
+end
+
 # Make sure that one string (regexp) occurs before or after another one
 #   on the same page
 
@@ -51,4 +57,13 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
       step "check \"ratings_#{rating}\""
     end
   end
+end
+
+
+When /^(?:|I )confirm the alert$/ do
+  page.driver.browser.switch_to.alert.accept
+end
+
+When /^(?:|I )cancel the alert$/ do
+  page.driver.browser.switch_to.alert.dismiss
 end

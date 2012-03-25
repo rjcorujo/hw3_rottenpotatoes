@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
     when 'release_date'
       ordering,@date_header = {:order => :release_date}, 'hilite'
     end
-    @all_ratings = Movie.all_ratings
+    @all_ratings = Movie.all_ratings_movie
     @selected_ratings = params[:ratings] || session[:ratings] || {}
 
     if params[:sort] != session[:sort]
@@ -56,6 +56,17 @@ class MoviesController < ApplicationController
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
+  end
+  
+  def find_same_director
+    m = Movie.find(params[:id])
+    if m.director.blank?
+      flash[:notice] = "'#{m.title}' has no director info"
+      redirect_to movies_path
+    else
+      @movies = m.find_same_director
+      render :template=>"movies/list_results"      
+    end
   end
 
 end
